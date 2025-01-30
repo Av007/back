@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 from datetime import timedelta
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -26,6 +27,14 @@ SECRET_KEY = 'django-insecure-02qel4rd#&rcp@rxd47f94k85-pm480qgb1@yjy^luysgp)yr5
 DEBUG = True
 
 ALLOWED_HOSTS = ["0.0.0.0", "localhost", "127.0.0.1"]
+
+
+STATIC_URL = 'static/'
+STATIC_ROOT = os.path.join(f"{BASE_DIR}/../", 'static')
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'public'),
+]
 
 
 # Application definition

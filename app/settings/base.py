@@ -12,6 +12,10 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 from datetime import timedelta
 from pathlib import Path
 import os
+import environ
+
+env = environ.Env()
+environ.Env.read_env()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -22,11 +26,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-02qel4rd#&rcp@rxd47f94k85-pm480qgb1@yjy^luysgp)yr5'
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = ["0.0.0.0", "localhost", "127.0.0.1", 'backtable-stage.eu.aldryn.io']
 
 
 STATIC_URL = 'static/'
@@ -86,6 +85,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+ALLOWED_HOSTS = env.list("ALLOWED_HOSTS", default=[])
 
 CORS_ALLOW_ALL_ORIGINS = True
 
@@ -163,19 +164,3 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-CORS_ALLOWED_ORIGINS = [
-    "http://127.0.0.1:3000",
-    "http://0.0.0.0:3000",
-    "http://localhost:3000"
-    "http://localhost:5173",
-    "http://127.0.0.1:8000"
-    "http://frontend:3000"
-]
-
-CORS_ALLOW_HEADERS = [
-    'content-type',
-    'authorization',
-    'x-csrftoken',
-    'x-requested-with'
-]
